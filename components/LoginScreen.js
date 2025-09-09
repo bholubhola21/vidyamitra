@@ -14,7 +14,7 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import FAIcon from "react-native-vector-icons/FontAwesome";
-import { auth } from "../firebaseConfig"; // 👈 update path if needed
+import { auth } from "../src/firebaseConfig"; // 👈 update path if needed
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 export default function LoginScreen() {
