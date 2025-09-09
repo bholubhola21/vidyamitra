@@ -14,14 +14,12 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import FAIcon from "react-native-vector-icons/FontAwesome";
-import { auth } from "../src/firebaseConfig"; // 👈 your firebase config
+import { auth } from "../firebaseConfig"; // 👈 update path if needed
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 export default function LoginScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const dismissKeyboard = () => Keyboard.dismiss();
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -32,7 +30,7 @@ export default function LoginScreen() {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
       Alert.alert("Success", `Welcome back, ${user.email}`);
-      // TODO: Navigate to Home screen
+      // TODO: Navigate to home/dashboard
     } catch (error) {
       Alert.alert("Login Failed", error.message);
     }
@@ -44,7 +42,7 @@ export default function LoginScreen() {
         style={{ flex: 1 }}
         behavior={Platform.OS === "ios" ? "padding" : undefined}
       >
-        <TouchableWithoutFeedback onPress={dismissKeyboard}>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
           <View style={styles.container}>
             {/* Header */}
             <View style={styles.header}>
@@ -66,6 +64,7 @@ export default function LoginScreen() {
                   placeholderTextColor="#aaa"
                   style={styles.input}
                   keyboardType="email-address"
+                  autoCapitalize="none"
                   value={email}
                   onChangeText={setEmail}
                 />
