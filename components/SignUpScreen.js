@@ -13,7 +13,8 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { auth, db } from "../src/firebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { setDoc, doc } from "firebase/firestore";
-
+import termsData from "../data/terms.json";
+import privacyData from "../data/privacy.json";
 export default function SignUpScreen({ navigation }) {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -27,7 +28,6 @@ export default function SignUpScreen({ navigation }) {
     }
 
     try {
-      // Create user in Firebase Auth
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
@@ -35,7 +35,6 @@ export default function SignUpScreen({ navigation }) {
       );
       const user = userCredential.user;
 
-      // Save user info in Firestore
       await setDoc(doc(db, "users", user.uid), {
         fullName,
         email,
@@ -44,8 +43,7 @@ export default function SignUpScreen({ navigation }) {
       });
 
       Alert.alert("Success", "Signup successful! Please log in.");
-      navigation.replace("Login"); // Navigate to login page
-
+      navigation.replace("Login");
     } catch (error) {
       Alert.alert("Signup Failed", error.message);
     }
@@ -53,19 +51,31 @@ export default function SignUpScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <ScrollView contentContainerStyle={styles.container}>
+      <ScrollView
+        contentContainerStyle={styles.container}
+        showsVerticalScrollIndicator={false}
+      >
+        {/* Header */}
         <View style={styles.header}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <MaterialIcons name="arrow-back-ios" size={22} color="white" />
+          </TouchableOpacity>
           <Text style={styles.headerTitle}>Sign Up</Text>
+          <View style={{ width: 24 }} />
         </View>
 
+        {/* Title */}
         <View style={styles.titleContainer}>
           <Text style={styles.title}>Create your account</Text>
-          <Text style={styles.subtitle}>Join our community of future leaders.</Text>
+          <Text style={styles.subtitle}>
+            Join our community of future leaders.
+          </Text>
         </View>
 
+        {/* Form */}
         <View style={styles.form}>
           <View style={styles.inputContainer}>
-            <MaterialIcons name="person" size={24} color="#a1a1aa" style={styles.icon} />
+            <MaterialIcons name="person" size={22} color="#a1a1aa" style={styles.icon} />
             <TextInput
               placeholder="Full Name"
               placeholderTextColor="#a1a1aa"
@@ -76,7 +86,7 @@ export default function SignUpScreen({ navigation }) {
           </View>
 
           <View style={styles.inputContainer}>
-            <MaterialIcons name="email" size={24} color="#a1a1aa" style={styles.icon} />
+            <MaterialIcons name="email" size={22} color="#a1a1aa" style={styles.icon} />
             <TextInput
               placeholder="Email"
               placeholderTextColor="#a1a1aa"
@@ -88,7 +98,7 @@ export default function SignUpScreen({ navigation }) {
           </View>
 
           <View style={styles.inputContainer}>
-            <MaterialIcons name="lock" size={24} color="#a1a1aa" style={styles.icon} />
+            <MaterialIcons name="lock" size={22} color="#a1a1aa" style={styles.icon} />
             <TextInput
               placeholder="Password"
               placeholderTextColor="#a1a1aa"
@@ -100,7 +110,12 @@ export default function SignUpScreen({ navigation }) {
           </View>
 
           <View style={styles.inputContainer}>
-            <MaterialIcons name="phone-iphone" size={24} color="#a1a1aa" style={styles.icon} />
+            <MaterialIcons
+              name="phone-iphone"
+              size={22}
+              color="#a1a1aa"
+              style={styles.icon}
+            />
             <TextInput
               placeholder="Mobile Number"
               placeholderTextColor="#a1a1aa"
@@ -116,12 +131,64 @@ export default function SignUpScreen({ navigation }) {
           </TouchableOpacity>
         </View>
 
+        {/* OR Divider */}
+        <View style={styles.orContainer}>
+          <View style={styles.line} />
+          <Text style={styles.orText}>Or sign up with</Text>
+          <View style={styles.line} />
+        </View>
+
+        {/* Social Buttons */}
+        <View style={styles.socialContainer}>
+          <TouchableOpacity style={styles.socialButton}>
+            <Text style={styles.socialText}>Google</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.socialButton}>
+            <Text style={styles.socialText}>Facebook</Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* Footer */}
         <View style={styles.footer}>
           <Text style={styles.footerText}>
             Already have an account?{" "}
-            <Text style={styles.footerLink} onPress={() => navigation.navigate("Login")}>
+            <Text
+              style={styles.footerLink}
+              onPress={() => navigation.navigate("Login")}
+            >
               Log In
             </Text>
+          </Text>
+        </View>
+
+        {/* Terms & Privacy */}
+        <View style={styles.policyContainer}>
+          <Text style={styles.policyText}>
+            By signing up, you agree to our{" "}
+            <Text
+              style={styles.policyLink}
+              onPress={() =>
+                navigation.navigate("PolicyScreen", {
+                  title: termsData.title,
+                  content: termsData.content, // supply JSON
+                })
+              }
+            >
+              Terms & Conditions
+            </Text>{" "}
+            and{" "}
+            <Text
+              style={styles.policyLink}
+              onPress={() =>
+                navigation.navigate("PolicyScreen", {
+                  title: privacyData.title,
+                  content: privacyData.content, // supply JSON
+                })
+              }
+            >
+              Privacy Policy
+            </Text>
+            .
           </Text>
         </View>
       </ScrollView>
@@ -131,13 +198,18 @@ export default function SignUpScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   safeArea: { flex: 1, backgroundColor: "#111714" },
-  container: { padding: 16, paddingBottom: 32 },
-  header: { alignItems: "center", marginBottom: 24 },
+  container: { padding: 24 },
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 24,
+  },
   headerTitle: { color: "white", fontSize: 18, fontWeight: "bold" },
   titleContainer: { alignItems: "center", marginBottom: 32 },
   title: { color: "white", fontSize: 28, fontWeight: "bold" },
   subtitle: { color: "#a1a1aa", fontSize: 14 },
-  form: { marginBottom: 32 },
+  form: { marginBottom: 24 },
   inputContainer: { position: "relative", marginBottom: 16 },
   icon: { position: "absolute", left: 12, top: "50%", marginTop: -12 },
   input: {
@@ -157,7 +229,27 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   signupButtonText: { color: "#111714", fontWeight: "bold", fontSize: 16 },
-  footer: { alignItems: "center" },
-  footerText: { color: "#a1a1aa", marginBottom: 4 },
+  orContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginVertical: 24,
+  },
+  line: { flex: 1, height: 1, backgroundColor: "#29382f" },
+  orText: { color: "#a1a1aa", marginHorizontal: 12, fontSize: 12 },
+  socialContainer: { flexDirection: "row", gap: 12, marginBottom: 32 },
+  socialButton: {
+    flex: 1,
+    backgroundColor: "#29382f",
+    height: 48,
+    borderRadius: 24,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  socialText: { color: "white", fontWeight: "600" },
+  footer: { alignItems: "center", marginBottom: 16 },
+  footerText: { color: "#a1a1aa" },
   footerLink: { color: "#38e07b", fontWeight: "bold" },
+  policyContainer: { paddingBottom: 32 },
+  policyText: { color: "#a1a1aa", fontSize: 12, textAlign: "center" },
+  policyLink: { color: "#38e07b", fontWeight: "600" },
 });

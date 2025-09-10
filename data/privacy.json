@@ -1,0 +1,25 @@
+{
+  "title": "Privacy Policy",
+  "content": [
+    {
+      "heading": "1. Information We Collect",
+      "text": "We collect personal information you provide when you register, such as your name, email, and phone number."
+    },
+    {
+      "heading": "2. How We Use Information",
+      "text": "Your information is used to provide and improve our services, personalize your experience, and communicate with you."
+    },
+    {
+      "heading": "3. Data Security",
+      "text": "We implement reasonable measures to protect your personal information from unauthorized access."
+    },
+    {
+      "heading": "4. Third-Party Services",
+      "text": "We may use third-party providers for analytics, authentication, or other services."
+    },
+    {
+      "heading": "5. Updates to Policy",
+      "text": "We may update this Privacy Policy from time to time. Please review periodically for changes."
+    }
+  ]
+}

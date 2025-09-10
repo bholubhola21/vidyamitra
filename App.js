@@ -8,6 +8,7 @@ import HomeScreen from "./components/HomeScreen";
 import CurrentAffairsScreen from "./components/CurrentAffairsScreen";
 import NewsDetailScreen from "./components/NewsDetailScreen";
 import UserProfileScreen from "./components/UserProfileScreen";
+import PolicyScreen from "./components/PolicyScreen";
 
 // Your HTML-like homepage
 
@@ -24,6 +25,7 @@ export default function App() {
         <Stack.Screen name="CurrentAffairs" component={CurrentAffairsScreen} />
         <Stack.Screen name="NewsDetail" component= {NewsDetailScreen} />
         <Stack.Screen name="UserProfile" component={UserProfileScreen} />  
+        <Stack.Screen name="PolicyScreen" component = {PolicyScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
