@@ -10,13 +10,11 @@ import {
   Share,
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-import newsData from "../data/news.json";
 
 export default function NewsDetailScreen({ navigation, route }) {
-  const { newsId } = route.params;
-  const news = newsData.find((n) => n.id === newsId);
+  const newsItem = route.params?.newsItem;
 
-  if (!news) {
+  if (!newsItem) {
     return (
       <SafeAreaView style={styles.safeArea}>
         <Text style={{ color: "white", textAlign: "center", marginTop: 50 }}>
@@ -31,8 +29,11 @@ export default function NewsDetailScreen({ navigation, route }) {
   const handleBack = () => navigation.goBack();
   const handleBookmark = () => setBookmarked((prev) => !prev);
   const handleShare = async () => {
-    await Share.share({ message: `${news.title}\n\n${news.lead}` });
+    await Share.share({ message: `${newsItem.title}\n\n${newsItem.lead}` });
   };
+
+  // Safety: ensure content array exists
+  const contentSections = newsItem.content || [];
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -58,20 +59,20 @@ export default function NewsDetailScreen({ navigation, route }) {
       {/* Body */}
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <View style={styles.metaContainer}>
-          <Text style={styles.categoryText}>{news.subtitle.toUpperCase()}</Text>
-          <Text style={styles.titleText}>{news.title}</Text>
+          <Text style={styles.categoryText}>{newsItem.subtitle?.toUpperCase()}</Text>
+          <Text style={styles.titleText}>{newsItem.title}</Text>
           <View style={styles.metaRow}>
-            <Text style={styles.metaSmall}>{`By ${news.author}`}</Text>
+            <Text style={styles.metaSmall}>{`By ${newsItem.author || "Unknown"}`}</Text>
             <Text style={styles.metaSmall}>•</Text>
-            <Text style={styles.metaSmall}>{news.date}</Text>
+            <Text style={styles.metaSmall}>{newsItem.date || ""}</Text>
           </View>
         </View>
 
-        <Image source={{ uri: news.image }} style={styles.articleImage} />
+        <Image source={{ uri: newsItem.image }} style={styles.articleImage} />
 
         <View style={styles.content}>
-          <Text style={styles.lead}>{news.lead}</Text>
-          {news.content.map((section, idx) => (
+          <Text style={styles.lead}>{newsItem.lead}</Text>
+          {contentSections.map((section, idx) => (
             <View key={idx} style={{ marginTop: 10 }}>
               <Text style={styles.sectionHeading}>{section.heading}</Text>
               <Text style={styles.paragraph}>{section.text}</Text>

@@ -1,90 +1,80 @@
 import React from "react";
 import {
+  SafeAreaView,
   View,
   Text,
-  FlatList,
-  TouchableOpacity,
-  Image,
   StyleSheet,
-  SafeAreaView,
+  ScrollView,
+  Pressable,
+  Image,
 } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
-import newsData from "../data/news.json";
+import Icon from "react-native-vector-icons/MaterialIcons";
+import data from "../data/news.json";
 
-export default function CurrentAffairsScreen({ navigation }) {
+const CurrentAffairsScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.safeArea}>
-      <FlatList
-        data={newsData}
-        keyExtractor={(item) => item.id.toString()}
-        contentContainerStyle={{ paddingBottom: 80 }}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            style={styles.card}
-            onPress={() => navigation.navigate("NewsDetail", { newsId: item.id })}
-          >
-            <Image source={{ uri: item.image }} style={styles.thumbnail} />
-            <View style={styles.textBox}>
-              <Text style={styles.subtitle}>{item.subtitle}</Text>
-              <Text style={styles.title}>{item.title}</Text>
-              <Text style={styles.authorDate}>
-                {item.author} • {item.date}
-              </Text>
-            </View>
-          </TouchableOpacity>
-        )}
-      />
-
-      {/* Bottom nav */}
-      <View style={styles.bottomNav}>
-        <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate("Home")}>
-          <MaterialIcons name="home" size={26} color="rgba(255,255,255,0.6)" />
-          <Text style={styles.navTextInactive}>Home</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.navItem}>
-          <MaterialIcons name="description" size={26} color="#38e07b" />
-          <Text style={styles.navTextActive}>Exams</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate("UserProfile")}>
-          <MaterialIcons name="person" size={26} color="rgba(255,255,255,0.6)" />
-          <Text style={styles.navTextInactive}>Profile</Text>
-        </TouchableOpacity>
+      {/* Header */}
+      <View style={styles.header}>
+        <Pressable onPress={() => navigation.goBack()} style={styles.backBtn}>
+          <Icon name="arrow-back-ios" size={20} color="#fff" />
+        </Pressable>
+        <Text style={styles.headerTitle}>Current Affairs</Text>
       </View>
+
+      <ScrollView contentContainerStyle={{ paddingBottom: 80 }}>
+        {data.news.map((newsItem, index) => (
+          <Pressable
+            key={index}
+            style={styles.newsCard}
+            onPress={() => navigation.navigate("NewsDetail", { newsItem })}
+          >
+            <Image source={{ uri: newsItem.image }} style={styles.newsImage} />
+            <View style={styles.newsOverlay} />
+            <View style={styles.newsTextWrapper}>
+              <Text style={styles.newsCategory}>{newsItem.category}</Text>
+              <Text style={styles.newsTitle}>{newsItem.title}</Text>
+              <Text style={styles.newsSubtitle}>{newsItem.subtitle}</Text>
+            </View>
+          </Pressable>
+        ))}
+      </ScrollView>
     </SafeAreaView>
   );
-}
+};
+
+export default CurrentAffairsScreen;
 
 const styles = StyleSheet.create({
   safeArea: { flex: 1, backgroundColor: "#111714" },
-  card: {
+  header: {
     flexDirection: "row",
-    margin: 10,
-    padding: 10,
-    backgroundColor: "#1c2620",
-    borderRadius: 12,
+    alignItems: "center",
+    padding: 16,
+    backgroundColor: "rgba(17,23,20,0.8)",
   },
-  thumbnail: { width: 80, height: 80, borderRadius: 8 },
-  textBox: { marginLeft: 10, flex: 1 },
-  subtitle: { color: "#38e07b", fontSize: 12 },
-  title: { color: "#fff", fontSize: 16, fontWeight: "bold" },
-  authorDate: { color: "rgba(255,255,255,0.6)", fontSize: 12, marginTop: 4 },
-
-  bottomNav: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    paddingTop: 8,
-    paddingBottom: 18,
-    backgroundColor: "rgba(28,38,32,0.9)",
-    borderTopWidth: 1,
-    borderTopColor: "#29382f",
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
+  backBtn: { backgroundColor: "#29382F", borderRadius: 25, padding: 8 },
+  headerTitle: {
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "bold",
+    flex: 1,
+    textAlign: "center",
+    marginRight: 32,
   },
-  navItem: { alignItems: "center" },
-  navTextActive: { color: "#38e07b", fontSize: 11, marginTop: 4 },
-  navTextInactive: { color: "rgba(255,255,255,0.6)", fontSize: 11, marginTop: 4 },
+  newsCard: {
+    width: "90%",
+    height: 200,
+    borderRadius: 16,
+    marginHorizontal: "5%",
+    marginVertical: 8,
+    overflow: "hidden",
+    alignSelf: "center",
+  },
+  newsImage: { width: "100%", height: "100%", borderRadius: 16 },
+  newsOverlay: { ...StyleSheet.absoluteFillObject, backgroundColor: "rgba(0,0,0,0.3)" },
+  newsTextWrapper: { position: "absolute", bottom: 12, left: 12, right: 12 },
+  newsCategory: { color: "#38e07b", fontSize: 12, fontWeight: "bold" },
+  newsTitle: { color: "#fff", fontSize: 16, fontWeight: "bold", marginTop: 2 },
+  newsSubtitle: { color: "rgba(255,255,255,0.8)", fontSize: 14, marginTop: 2 },
 });
