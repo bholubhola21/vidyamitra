@@ -14,10 +14,10 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import FAIcon from "react-native-vector-icons/FontAwesome";
-import { auth } from "../src/firebaseConfig"; // 👈 update path if needed
+import { auth,db } from "../src/firebaseConfig"; // 👈 update path if needed
 import { signInWithEmailAndPassword } from "firebase/auth";
 
-export default function LoginScreen() {
+export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -30,7 +30,8 @@ export default function LoginScreen() {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
       Alert.alert("Success", `Welcome back, ${user.email}`);
-      // TODO: Navigate to home/dashboard
+      navigation.replace("Home");
+      
     } catch (error) {
       Alert.alert("Login Failed", error.message);
     }
@@ -108,10 +109,12 @@ export default function LoginScreen() {
             </View>
 
             {/* Signup link */}
-            <Text style={styles.signupText}>
-              Don't have an account?{" "}
-              <Text style={styles.signupLink}>Sign Up</Text>
-            </Text>
+            <View style={{ flexDirection: "row", justifyContent: "center", marginTop: 20 }}>
+              <Text style={{ color: "#aaa" }}>Don't have an account? </Text>
+              <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
+                <Text style={styles.signupLink}>Sign Up</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
@@ -183,6 +186,5 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   socialText: { color: "#fff", fontWeight: "600" },
-  signupText: { textAlign: "center", color: "#aaa" },
   signupLink: { color: "#38e07b", fontWeight: "600" },
 });

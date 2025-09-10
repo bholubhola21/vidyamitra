@@ -1,0 +1,116 @@
+[
+  {
+    "id": 1,
+    "title": "Indian Economic Outlook: Q3 Analysis",
+    "subtitle": "Economy",
+    "author": "The Economic Times",
+    "date": "2023-10-26",
+    "image": "https://images.unsplash.com/photo-1512314889357-e157c22f938d?q=80&w=2940&auto=format&fit=crop",
+    "lead": "The third quarter of the fiscal year has shown promising signs of recovery and growth amidst global economic challenges.",
+    "content": [
+      {
+        "heading": "Key Drivers of Growth",
+        "text": "The service sector, particularly IT and financial services, has been a significant contributor to GDP growth this quarter. Manufacturing also saw a steady increase, buoyed by favorable government policies and a surge in domestic demand."
+      },
+      {
+        "heading": "Challenges on the Horizon",
+        "text": "Inflationary pressures, primarily driven by rising fuel and food prices, remain a concern. Global geopolitical tensions and supply chain disruptions could pose risks to export growth."
+      },
+      {
+        "heading": "Future Projections",
+        "text": "Analysts predict a continued growth trajectory, albeit at a moderated pace. Infrastructure development and digital transformation are expected to drive long-term growth."
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "India's Renewable Energy Surge",
+    "subtitle": "Energy",
+    "author": "Hindustan Times",
+    "date": "2023-11-12",
+    "image": "https://images.unsplash.com/photo-1509395062183-67c5ad6faff9?q=80&w=2940&auto=format&fit=crop",
+    "lead": "India is making massive investments in solar and wind energy, aiming to be a global leader in renewable power.",
+    "content": [
+      {
+        "heading": "Government Push",
+        "text": "The government has rolled out ambitious plans to increase renewable capacity by 2030. This is supported by foreign investment and technological innovation."
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "ISRO Successfully Launches Next-Gen Satellite",
+    "subtitle": "Science & Space",
+    "author": "NDTV",
+    "date": "2023-12-05",
+    "image": "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=2940&auto=format&fit=crop",
+    "lead": "ISRO has achieved another milestone with the successful deployment of its next-generation communication satellite.",
+    "content": [
+      {
+        "heading": "Mission Highlights",
+        "text": "The satellite will provide high-speed internet connectivity across rural areas of India, bridging the digital divide."
+      },
+      {
+        "heading": "International Collaboration",
+        "text": "Several global space agencies have shown interest in collaborating with ISRO for future missions."
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "India Wins Asia Cup Final",
+    "subtitle": "Sports",
+    "author": "ESPN India",
+    "date": "2023-09-18",
+    "image": "https://images.unsplash.com/photo-1521412644187-c49fa049e84d?q=80&w=2940&auto=format&fit=crop",
+    "lead": "India lifted the Asia Cup trophy after defeating their arch-rival in a thrilling final match.",
+    "content": [
+      {
+        "heading": "Star Performances",
+        "text": "The match saw incredible batting and bowling efforts, with Player of the Match going to the Indian captain."
+      },
+      {
+        "heading": "Celebrations",
+        "text": "Fans across the nation celebrated the victory with fireworks and processions."
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "New AI Policy Announced by Indian Government",
+    "subtitle": "Technology",
+    "author": "TechCrunch India",
+    "date": "2023-08-20",
+    "image": "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=2940&auto=format&fit=crop",
+    "lead": "The Indian government has unveiled its new AI policy aimed at promoting ethical AI innovation and startups.",
+    "content": [
+      {
+        "heading": "Policy Goals",
+        "text": "The framework emphasizes responsible use of AI in healthcare, education, and governance, while also supporting Indian AI startups with funding."
+      },
+      {
+        "heading": "Global Impact",
+        "text": "India aims to position itself as a global leader in artificial intelligence research and deployment."
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Severe Floods Affect Northern States",
+    "subtitle": "Environment",
+    "author": "The Hindu",
+    "date": "2023-07-15",
+    "image": "https://images.unsplash.com/photo-1508873535684-277a3cbcc4e9?q=80&w=2940&auto=format&fit=crop",
+    "lead": "Heavy monsoon rains have led to severe flooding across multiple states, displacing thousands of families.",
+    "content": [
+      {
+        "heading": "Relief Operations",
+        "text": "The National Disaster Response Force has been deployed to assist in evacuation and provide food and medical aid."
+      },
+      {
+        "heading": "Long-term Measures",
+        "text": "Experts are urging for better flood management systems and sustainable urban planning."
+      }
+    ]
+  }
+]
