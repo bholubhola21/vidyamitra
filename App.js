@@ -9,8 +9,9 @@ import CurrentAffairsScreen from "./components/CurrentAffairsScreen";
 import NewsDetailScreen from "./components/NewsDetailScreen";
 import UserProfileScreen from "./components/UserProfileScreen";
 import PolicyScreen from "./components/PolicyScreen";
+import ForgotPasswordScreen from "./components/ForgotPasswordScreen";
+import OtpVerificationScreen from "./components/OtpVerificationScreen";
 
-// Your HTML-like homepage
 
 const Stack = createStackNavigator();
 
@@ -26,6 +27,8 @@ export default function App() {
         <Stack.Screen name="NewsDetail" component= {NewsDetailScreen} />
         <Stack.Screen name="UserProfile" component={UserProfileScreen} />  
         <Stack.Screen name="PolicyScreen" component = {PolicyScreen} />
+        <Stack.Screen name="ForgotPassword" component = {ForgotPasswordScreen} />
+        <Stack.Screen name="OtpVerification" component = {OtpVerificationScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
